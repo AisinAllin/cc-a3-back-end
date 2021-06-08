@@ -18,13 +18,13 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
+#    volumes:
+#      - pgadmin-data:/var/lib/pgadmin
     restart: always
     ports:
       - 8001:80
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@cc.com
+      PGADMIN_DEFAULT_EMAIL: cca3@rmit.com
       PGADMIN_DEFAULT_PASSWORD: admin
     networks:
       - persist
