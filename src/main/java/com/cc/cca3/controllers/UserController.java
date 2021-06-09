@@ -17,15 +17,15 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/testpost")
+    @PostMapping("/saveuserinfo")
     public ResponseEntity login(@RequestBody AccountDto accountDto) {
-        UserEntity retrunedUser = userService.saveUserInfo(accountDto);
+        AccountDto retrunedUser = userService.saveUserInfo(accountDto);
         return ResponseEntity.ok(retrunedUser);
     }
 
-    @GetMapping("/testget")
-    public ResponseEntity verifyStatus(@RequestParam(value = "email") String email) {
-        UserEntity retrunedUser = userService.findUserInfoByEmail(email);
+    @GetMapping("/getuserinfo")
+    public ResponseEntity verifyStatus(@RequestParam(value = "id") Long id) {
+        UserEntity retrunedUser = userService.findUserInfoByEmail(id);
         return ResponseEntity.ok(retrunedUser);
     }
 }

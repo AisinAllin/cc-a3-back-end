@@ -9,17 +9,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountDto {
+public class MusicalInstrumentDto {
 
-    private Long id;
+    private Long musicId;
 
-    private String uuid;
+    private Long userId;
+
+    private String type;
 
     private String name;
 
-    private String email;
+    private Long num_left;
 
-    private String phone;
+    private Float price;
 
-    private String address;
+    private Long count;
+
+    private String description;
+
 }

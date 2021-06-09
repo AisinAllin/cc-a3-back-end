@@ -9,17 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountDto {
+public class CartGetDto {
 
-    private Long id;
+    private Long cartId;
 
-    private String uuid;
+    private Long musicId;
+
+    private Long userId;
 
     private String name;
 
-    private String email;
+    private Long numRequire;
 
-    private String phone;
+    private Float price;
 
-    private String address;
 }

@@ -5,7 +5,6 @@ import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,32 +14,37 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "user_info")
-public class UserEntity {
+@Table(name = "musical_instrument")
+public class MusicalInstrument {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     @Type(type = "long")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private UserEntity userEntity;
+
     @Column(unique = true)
-    private String uuid;
+    private String type;
 
     @Column
     private String name;
 
-    @Column
-    private String email;
-
-    @Column(name = "phone_number")
-    private String phone;
+    @Column(name = "num_left")
+    private Long numLeft;
 
     @Column
-    private String address;
+    private Float price;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
-    private Set<MusicalInstrument> musicalInstruments;
+    @Column
+    private Long count;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @Column
+    private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "musicalInstrument", cascade = CascadeType.ALL)
     private Set<Cart> carts;
 }

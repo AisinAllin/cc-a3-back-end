@@ -15,26 +15,37 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserEntity saveUserInfo(AccountDto accountDto) {
+    public AccountDto saveUserInfo(AccountDto accountDto) {
         UserEntity returnedUser = userRepository.save(mapDtoToEntity(accountDto));
-        return returnedUser;
+
+        return mapEntityToDto(returnedUser);
     }
 
-    public UserEntity findUserInfoByEmail(String email) {
-        UserEntity returnedUser = userRepository.findByEmail(email).orElseThrow(
-                () -> new UserNotFoundException("can not find user by email: " + email)
+    public UserEntity findUserInfoByEmail(Long id) {
+        UserEntity returnedUser = userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException("can not find user by id: " + id)
         );
         return returnedUser;
     }
 
     private UserEntity mapDtoToEntity(AccountDto accountDto) {
         return UserEntity.builder()
+                .uuid(accountDto.getUuid())
                 .email(accountDto.getEmail())
                 .name(accountDto.getName())
-                .phone("04811111111")
-                .password(accountDto.getPassword())
-                .status("status")
-                .title(accountDto.getTitle())
+                .phone(accountDto.getPhone())
+                .address(accountDto.getAddress())
+                .build();
+    }
+
+    private AccountDto mapEntityToDto(UserEntity userEntity) {
+        return AccountDto.builder()
+                .id(userEntity.getId())
+                .uuid(userEntity.getUuid())
+                .name(userEntity.getName())
+                .email(userEntity.getEmail())
+                .phone(userEntity.getPhone())
+                .address(userEntity.getAddress())
                 .build();
     }
 

@@ -24,13 +24,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/testpost", "/testget", "/login", "/company", "/signup", "/invitations/companies",
-                        "/invitations/register", "/resend", "/verify",
-                        "/companies", "/companies/company-info", "/companies/{companyId}",
-                        "/companies/{companyId}/profile", "/companies/{companyId}/employees",
-                        "/projects", "/projects/{companyId}", "/projects/{projectId}/project-info",
-                        "/projects/{projectid}/todolists", "/projects/{projectid}/todolists/{todolistid}/todoitems",
-                        "/projects/{projectid}/todolists", "/projects/{projectid}/todolists/{todolistid}"
+                .antMatchers("/postmusicalinstrument",
+                        "/saveuserinfo",
+                        "/getmusicalinstrument",
+                        "/getcartinfo",
+                        "/postcartinfo",
+                        "/getuserinfo"
                 )
                 .permitAll()
                 .antMatchers("/", "index", "/css/*", "/actuator/*")
