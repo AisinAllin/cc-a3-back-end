@@ -2,6 +2,7 @@ package com.cc.cca3.repositories;
 
 import com.cc.cca3.models.MusicalInstrument;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,12 @@ public interface MusicalInstrumentRepository extends JpaRepository<MusicalInstru
                     "order by mi.count DESC limit 20")
     List<MusicalInstrument> getAllAndOrderByCount();
 
+    @Modifying
+    @Query("update MusicalInstrument c set c.added=true where c.id=:id")
+    int updateAddedById(@Param("id") Long id);
+
+
+    @Modifying
+    @Query("update MusicalInstrument c set c.added=false where c.id=:id")
+    int updateAddedByIdToFalse(@Param("id") Long id);
 }

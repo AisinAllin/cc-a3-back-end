@@ -31,7 +31,6 @@ public class CartService {
 
     private List<CartGetDto> mapEntityToDot(List<Cart> cartList) {
 
-
         List<CartGetDto> result = cartList.stream().map(temp -> {
             CartGetDto cartGetDto = CartGetDto.builder()
                     .cartId(temp.getId())
@@ -39,6 +38,7 @@ public class CartService {
                     .userId(temp.getUserEntity().getId())
                     .name(temp.getMusicalInstrument().getName())
                     .numRequire(temp.getNumRequire())
+                    .added(temp.getMusicalInstrument().getAdded())
                     .numLeft(temp.getMusicalInstrument().getNumLeft())
                     .price(temp.getMusicalInstrument().getPrice())
                     .build();
@@ -94,6 +94,5 @@ public class CartService {
     public void updateRequireNumber(CartGetDto cartGetDto) {
         cartRepository.updateRequireNumberById(cartGetDto.getCartId(), cartGetDto.getNumRequire());
     }
-
 
 }

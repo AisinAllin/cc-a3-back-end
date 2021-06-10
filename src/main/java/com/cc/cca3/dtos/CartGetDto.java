@@ -23,6 +23,8 @@ public class CartGetDto {
 
     private Long numLeft;
 
+    private Boolean added;
+
     private Float price;
 
 }

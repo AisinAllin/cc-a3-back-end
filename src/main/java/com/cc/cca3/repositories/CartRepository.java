@@ -22,6 +22,7 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     Optional<Cart> findById(@Param("id") Long id);
 
     @Modifying
-    @Query("update Cart c  set c.numRequire=:numRequire where c.id=:id")
+    @Query("update Cart c set c.numRequire=:numRequire where c.id=:id")
     int updateRequireNumberById(@Param("id") Long id, @Param("numRequire") Long numRequire);
+
 }

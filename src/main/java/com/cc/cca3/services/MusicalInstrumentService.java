@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,7 @@ public class MusicalInstrumentService {
                     .name(temp.getName())
                     .num_left(temp.getNumLeft())
                     .price(temp.getPrice())
+                    .added(temp.getAdded())
                     .count(temp.getCount())
                     .description(temp.getDescription())
                     .build();
@@ -81,5 +83,16 @@ public class MusicalInstrumentService {
                 .count(musicalInstrument.getCount())
                 .description(musicalInstrument.getDescription())
                 .build();
+    }
+
+    @Transactional
+    public void updateCartStatus(Long musicId) {
+        musicalInstrumentRepository.updateAddedById(musicId);
+    }
+
+    @Transactional
+    public void updateCartStatusToFalse(Long musicId) {
+        musicalInstrumentRepository.updateAddedByIdToFalse(musicId);
+
     }
 }

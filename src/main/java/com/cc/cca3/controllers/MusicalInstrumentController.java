@@ -35,4 +35,16 @@ public class MusicalInstrumentController {
         List<MusicalInstrumentDto> retrunedMI = musicalInstrumentService.getMusicInsByType(type);
         return ResponseEntity.ok(retrunedMI);
     }
+
+    @PutMapping("/updateaddstatus")
+    public ResponseEntity updateCartStatus(@RequestBody MusicalInstrumentDto musicalInstrumentDto) {
+        musicalInstrumentService.updateCartStatus(musicalInstrumentDto.getMusicId());
+        return ResponseEntity.ok("success");
+    }
+
+    @PutMapping("/updateaddstatusfalse")
+    public ResponseEntity updateCartStatusToFalse(@RequestBody MusicalInstrumentDto musicalInstrumentDto) {
+        musicalInstrumentService.updateCartStatusToFalse(musicalInstrumentDto.getMusicId());
+        return ResponseEntity.ok("success");
+    }
 }

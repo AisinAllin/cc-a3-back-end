@@ -32,4 +32,5 @@ public class Cart {
 
     @Column(name = "num_require")
     private Long numRequire;
+    
 }

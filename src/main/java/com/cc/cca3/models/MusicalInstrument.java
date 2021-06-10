@@ -43,6 +43,9 @@ public class MusicalInstrument {
     private Long count;
 
     @Column
+    private Boolean added;
+
+    @Column
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "musicalInstrument", cascade = CascadeType.ALL)

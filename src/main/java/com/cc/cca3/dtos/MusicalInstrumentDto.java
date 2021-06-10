@@ -27,4 +27,6 @@ public class MusicalInstrumentDto {
 
     private String description;
 
+    private Boolean added;
+
 }

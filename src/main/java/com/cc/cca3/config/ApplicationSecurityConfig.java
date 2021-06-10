@@ -26,7 +26,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/postmusicalinstrument",
                         "/fetchuserinfo",
+                        "/updateaddstatusfalse",
                         "/totalprice",
+                        "/updateaddstatus",
                         "/updatereqnum",
                         "/removecartitem",
                         "/updateuerinfo",
