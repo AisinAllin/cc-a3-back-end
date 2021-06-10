@@ -15,6 +15,6 @@ public class CorsConfig implements WebMvcConfigurer {
 //						"http://www.asyncworking.com",
 //						"https://www.asyncworking.com"
 				)
-				.allowedMethods("GET", "POST", "PUT", "OPTIONS", "HEAD");
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD");
 	}
 }

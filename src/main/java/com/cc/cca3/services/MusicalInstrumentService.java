@@ -1,6 +1,8 @@
 package com.cc.cca3.services;
 
+import com.cc.cca3.dtos.CartGetDto;
 import com.cc.cca3.dtos.MusicalInstrumentDto;
+import com.cc.cca3.models.Cart;
 import com.cc.cca3.models.MusicalInstrument;
 import com.cc.cca3.models.UserEntity;
 import com.cc.cca3.repositories.MusicalInstrumentRepository;
@@ -10,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -19,9 +22,33 @@ public class MusicalInstrumentService {
     private final MusicalInstrumentRepository musicalInstrumentRepository;
     private final UserRepository userRepository;
 
-    public List<MusicalInstrument> test() {
+    public List<MusicalInstrumentDto> test() {
         List<MusicalInstrument> returnedMI = musicalInstrumentRepository.getAllAndOrderByCount();
-        return returnedMI;
+        return mapEntityToDot(returnedMI);
+    }
+
+    public List<MusicalInstrumentDto> getMusicInsByType(String type) {
+        List<MusicalInstrument> returnedMI = musicalInstrumentRepository.findByType(type);
+        return mapEntityToDot(returnedMI);
+    }
+
+    private List<MusicalInstrumentDto> mapEntityToDot(List<MusicalInstrument> musicLists) {
+
+
+        List<MusicalInstrumentDto> result = musicLists.stream().map(temp -> {
+            MusicalInstrumentDto musicGetDto = MusicalInstrumentDto.builder()
+                    .musicId(temp.getId())
+                    .userId(temp.getUserEntity().getId())
+                    .type(temp.getType())
+                    .name(temp.getName())
+                    .num_left(temp.getNumLeft())
+                    .price(temp.getPrice())
+                    .count(temp.getCount())
+                    .description(temp.getDescription())
+                    .build();
+            return musicGetDto;
+        }).collect(Collectors.toList());
+        return result;
     }
 
     public MusicalInstrumentDto saveMusicInst(MusicalInstrumentDto musicalInstrumentDto) {

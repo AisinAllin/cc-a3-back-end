@@ -25,6 +25,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/postmusicalinstrument",
+                        "/fetchuserinfo",
+                        "/totalprice",
+                        "/updatereqnum",
+                        "/removecartitem",
+                        "/updateuerinfo",
+                        "/getmusicinsbytype",
                         "/saveuserinfo",
                         "/getmusicalinstrument",
                         "/getcartinfo",

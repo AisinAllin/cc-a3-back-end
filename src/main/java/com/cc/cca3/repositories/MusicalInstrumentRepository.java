@@ -14,11 +14,12 @@ import java.util.List;
 public interface MusicalInstrumentRepository extends JpaRepository<MusicalInstrument, Long> {
 
     @Query("select m from MusicalInstrument as m where m.type= :type")
-    List<MusicalInstrumentRepository> findByType(@Param("type") String type);
+    List<MusicalInstrument> findByType(@Param("type") String type);
 
     @Query(nativeQuery = true,
             value = "select * \n" +
                     "from musical_instrument mi \n" +
                     "order by mi.count DESC limit 20")
     List<MusicalInstrument> getAllAndOrderByCount();
+
 }

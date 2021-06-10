@@ -21,6 +21,8 @@ public class CartGetDto {
 
     private Long numRequire;
 
+    private Long numLeft;
+
     private Float price;
 
 }

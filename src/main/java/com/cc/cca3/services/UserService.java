@@ -7,6 +7,7 @@ import com.cc.cca3.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -21,11 +22,23 @@ public class UserService {
         return mapEntityToDto(returnedUser);
     }
 
-    public UserEntity findUserInfoByEmail(Long id) {
+    public Long findUserInfoByEmail(String uuid) {
+        UserEntity returnedUser = userRepository.findByUuid(uuid).orElseThrow(
+                () -> new UserNotFoundException("can not find user by id: " + uuid)
+        );
+        return returnedUser.getId();
+    }
+
+    public AccountDto fetchuserinfo(Long id) {
         UserEntity returnedUser = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException("can not find user by id: " + id)
         );
-        return returnedUser;
+        return mapEntityToDto(returnedUser);
+    }
+
+    @Transactional
+    public void updateUserInfo(AccountDto accountDto) {
+       userRepository.updateCompanyProfileById(accountDto.getId(), accountDto.getName(),accountDto.getAddress(), accountDto.getPhone());
     }
 
     private UserEntity mapDtoToEntity(AccountDto accountDto) {

@@ -1,7 +1,6 @@
 package com.cc.cca3.controllers;
 
 import com.cc.cca3.dtos.AccountDto;
-import com.cc.cca3.models.UserEntity;
 import com.cc.cca3.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +23,20 @@ public class UserController {
     }
 
     @GetMapping("/getuserinfo")
-    public ResponseEntity verifyStatus(@RequestParam(value = "id") Long id) {
-        UserEntity retrunedUser = userService.findUserInfoByEmail(id);
-        return ResponseEntity.ok(retrunedUser);
+    public ResponseEntity verifyStatus(@RequestParam(value = "uuid") String uuid) {
+        Long userId = userService.findUserInfoByEmail(uuid);
+        return ResponseEntity.ok(userId);
+    }
+
+    @GetMapping("/fetchuserinfo")
+    public ResponseEntity fetchuserinfo(@RequestParam(value = "id") Long id) {
+        AccountDto userinfo = userService.fetchuserinfo(id);
+        return ResponseEntity.ok(userinfo);
+    }
+
+    @PutMapping("/updateuerinfo")
+    public ResponseEntity updateUserInfo(@RequestBody AccountDto accountDto) {
+        userService.updateUserInfo(accountDto);
+        return ResponseEntity.ok("success");
     }
 }
