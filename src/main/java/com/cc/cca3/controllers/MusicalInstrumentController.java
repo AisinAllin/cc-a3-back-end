@@ -50,7 +50,7 @@ public class MusicalInstrumentController {
     }
 
     @GetMapping("/s3imglink")
-    public URL getArtistImgLink(@RequestParam(value = "musicId")String musicId){
+    public URL getArtistImgLink(@RequestParam(value = "musicId") String musicId) {
         return musicalInstrumentService.getImgUrlLinkFromS3(musicId);
     }
 }

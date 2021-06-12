@@ -1,9 +1,7 @@
 package com.cc.cca3.services;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.cc.cca3.dtos.CartGetDto;
 import com.cc.cca3.dtos.MusicalInstrumentDto;
-import com.cc.cca3.models.Cart;
 import com.cc.cca3.models.MusicalInstrument;
 import com.cc.cca3.models.UserEntity;
 import com.cc.cca3.repositories.MusicalInstrumentRepository;
@@ -22,11 +20,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MusicalInstrumentService {
 
+    private static final String REGION = "ap-southeast-2";
     private final MusicalInstrumentRepository musicalInstrumentRepository;
     private final UserRepository userRepository;
     private final AmazonS3 amazonS3;
-
-    private static final String REGION = "ap-southeast-2";
 
     public URL getImgUrlLinkFromS3(String id) {
         String imgName = id;

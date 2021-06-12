@@ -38,7 +38,7 @@ public class UserService {
 
     @Transactional
     public void updateUserInfo(AccountDto accountDto) {
-       userRepository.updateCompanyProfileById(accountDto.getId(), accountDto.getName(),accountDto.getAddress(), accountDto.getPhone());
+        userRepository.updateCompanyProfileById(accountDto.getId(), accountDto.getName(), accountDto.getAddress(), accountDto.getPhone());
     }
 
     private UserEntity mapDtoToEntity(AccountDto accountDto) {

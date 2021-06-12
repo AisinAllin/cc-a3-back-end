@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,7 +22,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Modifying
     @Query("update UserEntity u  set u.name=:name, u.address=:address, u.phone=:phone where u.id=:id")
-    int updateCompanyProfileById(@Param("id")Long id,
+    int updateCompanyProfileById(@Param("id") Long id,
                                  @Param("name") String name,
                                  @Param("address") String address,
                                  @Param("phone") String phone);
