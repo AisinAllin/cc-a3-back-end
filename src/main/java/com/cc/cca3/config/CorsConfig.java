@@ -11,7 +11,10 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                        "http://localhost:3000"
+                        "http://localhost:3000",
+                        "http://musicinstrumentsalecca3.com",
+                        "http://www.musicinstrumentsalecca3.com",
+                        "https://www.musicinstrumentsalecca3.com/"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD");
     }
