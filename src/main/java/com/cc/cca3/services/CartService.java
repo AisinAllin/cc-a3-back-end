@@ -59,8 +59,8 @@ public class CartService {
     }
 
     public CartGetDto saveInfoToCart(CartPostDto cartPostDto) {
-        UserEntity user = userRepository.getById(cartPostDto.getUserId());
-        MusicalInstrument mi = musicalInstrumentRepository.getById(cartPostDto.getMusicId());
+        UserEntity user = userRepository.findById(cartPostDto.getUserId()).get();
+        MusicalInstrument mi = musicalInstrumentRepository.findById(cartPostDto.getMusicId()).get();
         Cart savedCart = cartRepository.save(mapDtoToEntity(cartPostDto, mi, user));
 
         return mapEntityToDto(savedCart);

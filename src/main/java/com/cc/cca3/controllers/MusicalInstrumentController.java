@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URL;
 import java.util.List;
 
 @Slf4j
@@ -46,5 +47,10 @@ public class MusicalInstrumentController {
     public ResponseEntity updateCartStatusToFalse(@RequestBody MusicalInstrumentDto musicalInstrumentDto) {
         musicalInstrumentService.updateCartStatusToFalse(musicalInstrumentDto.getMusicId());
         return ResponseEntity.ok("success");
+    }
+
+    @GetMapping("/s3imglink")
+    public URL getArtistImgLink(@RequestParam(value = "musicId")String musicId){
+        return musicalInstrumentService.getImgUrlLinkFromS3(musicId);
     }
 }

@@ -1,5 +1,6 @@
 package com.cc.cca3.services;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.cc.cca3.dtos.CartGetDto;
 import com.cc.cca3.dtos.MusicalInstrumentDto;
 import com.cc.cca3.models.Cart;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +24,14 @@ public class MusicalInstrumentService {
 
     private final MusicalInstrumentRepository musicalInstrumentRepository;
     private final UserRepository userRepository;
+    private final AmazonS3 amazonS3;
+
+    private static final String REGION = "ap-southeast-2";
+
+    public URL getImgUrlLinkFromS3(String id) {
+        String imgName = id;
+        return amazonS3.getUrl("cc-a3-img", imgName);
+    }
 
     public List<MusicalInstrumentDto> test() {
         List<MusicalInstrument> returnedMI = musicalInstrumentRepository.getAllAndOrderByCount();
@@ -54,7 +64,7 @@ public class MusicalInstrumentService {
     }
 
     public MusicalInstrumentDto saveMusicInst(MusicalInstrumentDto musicalInstrumentDto) {
-        UserEntity user = userRepository.getById(musicalInstrumentDto.getUserId());
+        UserEntity user = userRepository.findById(musicalInstrumentDto.getUserId()).get();
         MusicalInstrument returnMI = mapDtoToEntity(user, musicalInstrumentDto);
         MusicalInstrument savedMI = musicalInstrumentRepository.save(returnMI);
         return mapEntityToDto(savedMI);

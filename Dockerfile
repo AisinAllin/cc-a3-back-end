@@ -1,6 +1,6 @@
 FROM openjdk:11 AS build
 WORKDIR /workspace/app
-COPY src /workspace/app
+COPY . /workspace/app
 
 RUN ./gradlew clean build
 
@@ -9,7 +9,7 @@ VOLUME /tmp
 
 ARG VERSION=0.0.1-SNAPSHOT
 ARG AWCHEET_DIR=/workspace/app/build/libs
-COPY --from=build ${AWCHEET_DIR}/cc-backend-${VERSION}.jar app.jar
+COPY --from=build ${AWCHEET_DIR}/cc-a3-${VERSION}.jar app.jar
 
 ENV JAVA_OPTS=""
 ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar /app.jar" ]
